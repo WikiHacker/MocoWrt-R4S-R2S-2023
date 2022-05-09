@@ -20,7 +20,7 @@ env:
 jobs:
   Build:
     runs-on: ubuntu-20.04
-    if: github.repository == 'WikiHacker/MocoWrt-R2S-R4S-2023'
+    if: github.repository == 'WikiHacker/MocoWrt-R4S-R2S-2023'
     outputs:
       OPENWRTROOT: ${{ steps.update.outputs.OPENWRTROOT }}
       PLATFORM: ${{ steps.compile.outputs.PLATFORM }}
