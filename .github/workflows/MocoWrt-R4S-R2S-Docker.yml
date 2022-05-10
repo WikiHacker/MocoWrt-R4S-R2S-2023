@@ -173,7 +173,7 @@ jobs:
         
     - name: Upload Firmware To WeTransfer
       id: wetransfer
-      if: steps.organize.outputs.ORGANIZE_STATUS == 'success' && env.UPLOAD_WETRANSFER == 'true'
+      if: steps.generate.outputs.GENERATE_STATUS == 'success' && env.UPLOAD_WETRANSFER == 'true'
       run: |
         cd $OPENWRTROOT/bin/targets/$TARGET/
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE}/*nanopi* 2>&1 | tee wetransfer-firmware.log
