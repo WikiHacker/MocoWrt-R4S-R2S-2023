@@ -15,7 +15,7 @@ env:
   DIY_SH: scripts/lean.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
-  UPLOAD_WETRANSFER: true
+  UPLOAD_WETRANSFER: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -168,6 +168,9 @@ jobs:
         rm -rf bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-rootfs.tar.gz
         rm -rf bin/targets/rockchip/armv8/config.buildinfo
         rm -rf bin/targets/rockchip/armv8/packages-server.zip
+        #get the present files information
+        cd bin/targets/rockchip/armv8
+        ls
         make checksum
         echo "::set-output name=GENERATE_STATUS::success"
         
@@ -176,6 +179,7 @@ jobs:
       if: steps.generate.outputs.GENERATE_STATUS == 'success' && env.UPLOAD_WETRANSFER == 'true'
       run: |
         cd $OPENWRTROOT/bin/targets/$TARGET/
+        ls
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE}/*nanopi* 2>&1 | tee wetransfer-firmware.log
         echo "::warning file=Firmware-Wetransfer.com::$(cat wetransfer-firmware.log | grep https)"
         echo "::set-output name=url::$(cat wetransfer-firmware.log | grep https | cut -f3 -d" ")"
