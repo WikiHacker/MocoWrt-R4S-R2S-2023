@@ -169,10 +169,10 @@ jobs:
         rm -rf bin/targets/rockchip/armv8/config.buildinfo
         rm -rf bin/targets/rockchip/armv8/packages-server.zip
         #get the present files information
-        cd bin/targets/rockchip/armv8
-        ls
         make checksum
         echo "::set-output name=GENERATE_STATUS::success"
+        cd bin/targets/rockchip/armv8
+        ls
         
     - name: Upload Firmware To WeTransfer
       id: wetransfer
