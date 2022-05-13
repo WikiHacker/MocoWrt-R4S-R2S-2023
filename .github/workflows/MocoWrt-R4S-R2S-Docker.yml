@@ -15,7 +15,7 @@ env:
   DIY_SH: scripts/lean.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
-  UPLOAD_WETRANSFER: false
+  UPLOAD_WETRANSFER: true
   TZ: Asia/Shanghai
 
 jobs:
