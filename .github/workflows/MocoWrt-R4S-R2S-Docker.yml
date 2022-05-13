@@ -180,6 +180,7 @@ jobs:
       run: |
         cd $OPENWRTROOT/bin/targets/$TARGET/
         ls
+        curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE}/*nanopi* 2>&1 | tee wetransfer-firmware.log
         echo "::warning file=Firmware-Wetransfer.com::$(cat wetransfer-firmware.log | grep https)"
         echo "::set-output name=url::$(cat wetransfer-firmware.log | grep https | cut -f3 -d" ")"
