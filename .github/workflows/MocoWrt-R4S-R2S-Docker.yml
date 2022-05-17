@@ -196,15 +196,22 @@ jobs:
           [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
           echo "::set-output name=status::success"
 
-    - name: Upload firmware to release
-      uses: ncipollo/release-action@v1
-      if: steps.tag.outputs.status == 'success' && !cancelled()
+    - name: Shot Method to upload Files
+      uses: softprops/action-gh-release@v1
       with:
-        tag: ${{ steps.tag.outputs.release_tag }}
-        artifacts: ${{ env.FIRMWARE }}/*
-        allowUpdates: true
-        token: ${{ secrets.GITHUB_TOKEN }}
-        body: release.txt
+        files: '${{ env.FIRMWARE }}/*.*'
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+		  
+#     - name: Upload firmware to release
+#       uses: ncipollo/release-action@v1
+#       if: steps.tag.outputs.status == 'success' && !cancelled()
+#       with:
+#         tag: ${{ steps.tag.outputs.release_tag }}
+#         artifacts: ${{ env.FIRMWARE }}/*
+#         allowUpdates: true
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#         body: release.txt
           
 
 #     - name: Upload firmware to release
@@ -219,23 +226,23 @@ jobs:
 #           body_path: release.txt
 #           files: ${{ env.FIRMWARE }}/*
 
-    - name: Delete workflow runs
-      uses: GitRML/delete-workflow-runs@main
-      with:
-          retain_days: 1
-          keep_minimum_runs: 1
+#     - name: Delete workflow runs
+#       uses: GitRML/delete-workflow-runs@main
+#       with:
+#           retain_days: 1
+#           keep_minimum_runs: 1
 
-    - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@v0.1.0
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      with:
-          keep_latest: 20
-          delete_tags: true
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Remove old Releases
+#       uses: dev-drprasad/delete-older-releases@v0.1.0
+#       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+#       with:
+#           keep_latest: 20
+#           delete_tags: true
+#       env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Delete Artifacts
-      uses: geekyeggo/delete-artifact@v1
-      with:
-          name: |
-            bin-archive
+#     - name: Delete Artifacts
+#       uses: geekyeggo/delete-artifact@v1
+#       with:
+#           name: |
+#             bin-archive
