@@ -202,7 +202,7 @@ jobs:
         files: '${{ env.FIRMWARE }}/*.*'
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-		  
+
 #     - name: Upload firmware to release
 #       uses: ncipollo/release-action@v1
 #       if: steps.tag.outputs.status == 'success' && !cancelled()
