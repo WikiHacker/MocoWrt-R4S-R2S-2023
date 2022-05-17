@@ -1,0 +1,30 @@
+name: MocoWrt-R4S-R2S-Docker
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  #schedule:
+    #- cron: 0 17 * * *
+  # watch:
+  #   types: started
+
+jobs:
+  Build:
+    runs-on: ubuntu-20.04
+	
+    - name: download files
+      run: |
+         mkdir files
+		 cd files
+		 ls
+		 wget https://dl.todesk.com/windows/ToDesk_Lite_x64.exe
+         ls
+
+    - name: Upload firmware to release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: 5172022
+        artifacts: files/*
+        allowUpdates: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        body: Suceecss
