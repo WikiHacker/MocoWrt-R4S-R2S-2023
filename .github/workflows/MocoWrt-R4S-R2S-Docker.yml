@@ -199,7 +199,7 @@ jobs:
     - name: Shot Method to upload Files
       uses: softprops/action-gh-release@v1
       with:
-        files: '${{ env.FIRMWARE }}/*.*'
+        files: '${{ env.FIRMWARE }}/*'
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
