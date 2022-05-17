@@ -1,9 +1,9 @@
 name: Releases
 
-on: 
-  push:
-    tags:
-    - '*'
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
 
 jobs:
 
