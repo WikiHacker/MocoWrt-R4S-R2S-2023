@@ -198,12 +198,12 @@ jobs:
 
     - name: Shot Method to upload Files
       uses: softprops/action-gh-release@v1
-      with:
-        tag_name: ${{ steps.tag.outputs.release_tag }}
-        files: '${{ env.FIRMWARE }}/*'
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          files: '${{ env.FIRMWARE }}/*'
+#
 #     - name: Upload firmware to release
 #       uses: ncipollo/release-action@v1
 #       if: steps.tag.outputs.status == 'success' && !cancelled()
