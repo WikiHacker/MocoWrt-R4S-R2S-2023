@@ -205,8 +205,10 @@ jobs:
 #           files: '${{ env.FIRMWARE }}/*'
     - name: Upload Firmware to Release
       uses: svenstaro/upload-release-action@v2
+#       env:
+#          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         file: ${{ env.FIRMWARE }}/*
         tag: 5182022
         file_glob: true
