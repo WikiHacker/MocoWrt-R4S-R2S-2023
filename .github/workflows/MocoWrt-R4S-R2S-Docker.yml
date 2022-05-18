@@ -185,16 +185,16 @@ jobs:
         echo "::warning file=Firmware-Wetransfer.com::$(cat wetransfer-firmware.log | grep https)"
         echo "::set-output name=url::$(cat wetransfer-firmware.log | grep https | cut -f3 -d" ")"
 
-    - name: Generate release tag
-      id: tag
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      run: |
-          echo "::set-output name=release_tag::$(date +"%Y.%m.%d")-Lean1"
-          echo "::set-output name=release_date::$(date +"%Y.%m.%d")"
-          touch release.txt
-          echo "后台地址：192.168.11.1" >> release.txt
-          [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
-          echo "::set-output name=status::success"
+#     - name: Generate release tag
+#       id: tag
+#       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+#       run: |
+#           echo "::set-output name=release_tag::$(date +"%Y.%m.%d")-Lean1"
+#           echo "::set-output name=release_date::$(date +"%Y.%m.%d")"
+#           touch release.txt
+#           echo "后台地址：192.168.11.1" >> release.txt
+#           [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
+#           echo "::set-output name=status::success"
 #
 #     - name: Shot Method to upload Files
 #       uses: softprops/action-gh-release@v1
