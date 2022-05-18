@@ -185,24 +185,34 @@ jobs:
         echo "::warning file=Firmware-Wetransfer.com::$(cat wetransfer-firmware.log | grep https)"
         echo "::set-output name=url::$(cat wetransfer-firmware.log | grep https | cut -f3 -d" ")"
 
-#     - name: Generate release tag
-#       id: tag
-#       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-#       run: |
-#           echo "::set-output name=release_tag::$(date +"%Y.%m.%d")-Lean1"
-#           echo "::set-output name=release_date::$(date +"%Y.%m.%d")"
-#           touch release.txt
-#           echo "后台地址：192.168.11.1" >> release.txt
-#           [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
-#           echo "::set-output name=status::success"
-
-    - name: Shot Method to upload Files
-      uses: softprops/action-gh-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Generate release tag
+      id: tag
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      run: |
+          echo "::set-output name=release_tag::$(date +"%Y.%m.%d")-Lean1"
+          echo "::set-output name=release_date::$(date +"%Y.%m.%d")"
+          touch release.txt
+          echo "后台地址：192.168.11.1" >> release.txt
+          [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
+          echo "::set-output name=status::success"
+#
+#     - name: Shot Method to upload Files
+#       uses: softprops/action-gh-release@v1
+#       env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+# #          tag_name: ${{ steps.tag.outputs.release_tag }}
+#           files: '${{ env.FIRMWARE }}/*'
+    - name: Upload Firmware to Release
+      uses: svenstaro/upload-release-action@v2
       with:
-#          tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: '${{ env.FIRMWARE }}/*'
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ${{ env.FIRMWARE }}/*
+        tag: 5182022
+        file_glob: true
+        overwrite: true
+        release_name: TestFiles
+        body: release.txt
 #
 #     - name: Upload firmware to release
 #       uses: ncipollo/release-action@v1
