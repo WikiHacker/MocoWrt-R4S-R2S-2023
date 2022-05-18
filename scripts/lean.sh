@@ -144,7 +144,7 @@ sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_generate
 sed -i '/uci commit system/i\uci set system.@system[0].hostname='FusionWrt'' package/lean/default-settings/files/zzz-default-settings
-sed -i "s/OpenWrt /DHDAXCW @ FusionWrt /g" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/OpenWrt /MOCOWRT @ FusionWrt /g" package/lean/default-settings/files/zzz-default-settings
 
 #pushd target/linux/rockchip/patches-5.15
 #cp -f $GITHUB_WORKSPACE/scripts/patch/994-wode.patch 994-wode.patch
@@ -154,4 +154,4 @@ sed -i "s/OpenWrt /DHDAXCW @ FusionWrt /g" package/lean/default-settings/files/z
 # git am $GITHUB_WORKSPACE/patches/lean/*.patch
 # git am $GITHUB_WORKSPACE/patches/*.patch
 
-echo -e " DHDAXCW's FusionWrt built on "$(date +%Y.%m.%d)"\n -----------------------------------------------------" >> package/base-files/files/etc/banner
+echo -e " MOCOWRT's FusionWrt built on "$(date +%Y.%m.%d)"\n -----------------------------------------------------" >> package/base-files/files/etc/banner
